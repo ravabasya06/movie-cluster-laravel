@@ -12,7 +12,7 @@ body {
     color-scheme: light dark;
     margin: 0;
     color: white;
-    background-color: #121212;
+    background-color: #151515;
     display: grid;
     height: 100vh;
     grid-template-rows: auto 1fr auto;

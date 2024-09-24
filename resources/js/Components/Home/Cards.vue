@@ -40,7 +40,7 @@ defineProps(["movies", "title"]);
 .card {
     position: relative;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
+    border-radius: 10px;
     overflow: hidden;
     transition: transform 0.3s;
 }
@@ -51,8 +51,9 @@ defineProps(["movies", "title"]);
 
 .card img {
     width: 100%;
-    height: 250px;
+    height: 100%;
     object-fit: cover;
+    display: block;
 }
 .card:hover img {
     filter: brightness(50%);
@@ -75,7 +76,7 @@ defineProps(["movies", "title"]);
     bottom: 0;
     left: 0;
     right: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.6);
     color: #fff;
     text-align: center;
     padding: 10px;
@@ -89,7 +90,7 @@ defineProps(["movies", "title"]);
     right: 0;
     color: #fff;
     text-align: center;
-    padding: 10px;
+    padding: 5px;
     opacity: 0;
     transition: opacity 0.3s;
     z-index: 1;

@@ -1,63 +1,40 @@
 <script setup>
-import { Link } from "@inertiajs/vue3";
+defineProps(["movies", "title"]);
 </script>
 
 <template>
-    <div class="container-cards">
-        <Link>
-            <div class="card">
-                <img src="/public/images/Persona.png" />
-                <div class="rating">
-                    <p>16+</p>
+    <div class="recommendation-container">
+        <h1>{{ title }}</h1>
+        <div class="container-cards">
+            <Link v-if="movies" v-for="movie in movies.results" href="">
+                <div class="card">
+                    <img
+                        :src="`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`"
+                    />
+                    <div class="rating">
+                        <p>Rating : {{ movie.vote_average }}</p>
+                    </div>
+                    <div class="text">
+                        <h3>{{ movie.title }}</h3>
+                    </div>
+                    <div class="details">
+                        <p>{{ movie.release_date }}</p>
+                    </div>
                 </div>
-                <div class="text">
-                    <h3>Nama Film</h3>
-                    <p>Duration: 1h 3m</p>
-                </div>
-                <div class="details">
-                    <p>Genres: Action, Adventure</p>
-                </div>
-            </div>
-        </Link>
-        <Link>
-            <div class="card">
-                <img src="/public/images/Persona5.jpg" />
-                <div class="rating">
-                    <p>16+</p>
-                </div>
-                <div class="text">
-                    <h3>Nama Film</h3>
-                    <p>Duration: 50h</p>
-                </div>
-                <div class="details">
-                    <p>Genres: RPG, Adventure</p>
-                </div>
-            </div>
-        </Link>
-        <Link>
-            <div class="card">
-                <img src="/public/images/ONK-S2.jpeg" />
-                <div class="rating">
-                    <p>16+</p>
-                </div>
-                <div class="text">
-                    <h3>Nama Film</h3>
-                    <p>Duration: 50h</p>
-                </div>
-                <div class="details">
-                    <p>Genres: RPG, Adventure</p>
-                </div>
-            </div>
-        </Link>
+            </Link>
+        </div>
     </div>
 </template>
 
 <style scoped>
+.recommendation-container {
+    margin: 30px;
+}
+
 .container-cards {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 15px;
-    margin: 30px;
 }
 
 .card {

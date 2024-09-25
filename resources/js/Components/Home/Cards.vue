@@ -1,14 +1,19 @@
 <script setup>
 import MovieModal from "./MovieModal.vue";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, computed } from "vue";
 
 const props = defineProps(["movies", "title"]);
 
 let Movie;
 const selectedMovie = ref("");
 const containerRef = ref(null);
-const visibleCards = 1;
+const visibleCards = 3;
 const currentIndex = ref(0);
+
+const maxIndex = computed(() => {
+    const totalMovies = props.movies.results.length;
+    return Math.ceil(totalMovies / visibleCards);
+});
 
 onMounted(() => {
     const MovieModalElement = document.getElementById("moviepopup");
@@ -24,13 +29,15 @@ const showmovie = (themovie) => {
 
 const scroll = (direction) => {
     const container = containerRef.value;
-
-    const maxIndex = Math.ceil(props.movies.results.length / visibleCards) - 1;
-
-    currentIndex.value += direction === "right" ? 1 : -1;
-
-    if (currentIndex.value < 0) currentIndex.value = 0;
-    if (currentIndex.value > maxIndex) currentIndex.value = maxIndex;
+    if (direction === "right") {
+        if (currentIndex.value < maxIndex.value) {
+            currentIndex.value++;
+        }
+    } else if (direction === "left") {
+        if (currentIndex.value > 0) {
+            currentIndex.value--;
+        }
+    }
 
     const newScrollLeft =
         currentIndex.value * (container.clientWidth / visibleCards);
@@ -41,14 +48,17 @@ const scroll = (direction) => {
     <div class="recommendation-container">
         <h1>{{ title }}</h1>
         <div class="movie-caret-container">
-            <font-awesome-icon
-                icon="caret-left"
+            <i
                 class="caret-button"
+                :class="{ disabled: currentIndex === 0 }"
                 @click="scroll('left')"
-            />
+            >
+                <font-awesome-icon icon="caret-left" size="2xl" class="caret" />
+            </i>
+
             <div class="container-cards" ref="containerRef">
                 <div
-                    v-if="movies"
+                    v-if="movies && movies.results.length"
                     v-for="movie in movies.results"
                     :key="movie.id"
                     class="card"
@@ -67,13 +77,23 @@ const scroll = (direction) => {
                     </div>
                 </div>
             </div>
-            <font-awesome-icon
-                icon="caret-right"
+
+            <!-- Right Caret -->
+            <i
                 class="caret-button"
+                :class="{ disabled: currentIndex === maxIndex }"
                 @click="scroll('right')"
-            />
+            >
+                <font-awesome-icon
+                    icon="caret-right"
+                    size="2xl"
+                    class="caret"
+                />
+            </i>
         </div>
     </div>
+
+    <!-- Movie modal -->
     <MovieModal :movie="selectedMovie" />
 </template>
 
@@ -163,9 +183,12 @@ const scroll = (direction) => {
 }
 
 .caret-button {
-    height: 50px;
     background: rgba(0, 0, 0, 0.5);
     border-radius: 10px;
     padding: 15px;
+}
+.caret-button.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 </style>

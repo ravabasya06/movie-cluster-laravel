@@ -6,22 +6,22 @@ defineProps(["movies", "title"]);
     <div class="recommendation-container">
         <h1>{{ title }}</h1>
         <div class="container-cards">
-            <Link v-if="movies" v-for="movie in movies.results" href="">
-                <div class="card">
-                    <img
-                        :src="`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`"
-                    />
-                    <div class="rating">
-                        <p>Rating : {{ movie.vote_average }}</p>
-                    </div>
-                    <div class="text">
-                        <h3>{{ movie.title }}</h3>
-                    </div>
-                    <div class="details">
-                        <p>{{ movie.release_date }}</p>
-                    </div>
+            <div v-if="movies" v-for="movie in movies.results" class="card">
+                <img
+                    :src="`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`"
+                />
+                <div class="rating">
+                    <p>Rating : {{ movie.vote_average }}</p>
                 </div>
-            </Link>
+                <div class="text">
+                    <Link :href="`/movie/${movie.id}`">
+                        <h3>{{ movie.title }}</h3>
+                    </Link>
+                </div>
+                <div class="details">
+                    <p>{{ movie.release_date }}</p>
+                </div>
+            </div>
         </div>
     </div>
 </template>

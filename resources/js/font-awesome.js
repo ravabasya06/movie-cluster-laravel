@@ -5,10 +5,20 @@ import {
     faPlay,
     faThumbsUp,
     faFire,
+    faCaretRight,
+    faCaretLeft,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { faStar } from "@fortawesome/free-regular-svg-icons";
 
-library.add(faMagnifyingGlass, faThumbsUp, faPlay, faStar, faFire);
+library.add(
+    faMagnifyingGlass,
+    faThumbsUp,
+    faPlay,
+    faStar,
+    faFire,
+    faCaretRight,
+    faCaretLeft
+);
 
 export { FontAwesomeIcon };

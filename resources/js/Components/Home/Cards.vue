@@ -1,4 +1,18 @@
 <script setup>
+import MovieModal from "./MovieModal.vue";
+import { onMounted } from "vue";
+let Movie;
+
+onMounted(() => {
+    const MovieModalElement = document.getElementById("moviepopup");
+    if (MovieModalElement) {
+        Movie = new bootstrap.Modal(document.getElementById("moviepopup"));
+    }
+});
+
+const showmovie = () => {
+    Movie.show();
+};
 defineProps(["movies", "title"]);
 </script>
 
@@ -6,7 +20,12 @@ defineProps(["movies", "title"]);
     <div class="recommendation-container">
         <h1>{{ title }}</h1>
         <div class="container-cards">
-            <div v-if="movies" v-for="movie in movies.results" class="card">
+            <div
+                v-if="movies"
+                v-for="movie in movies.results"
+                class="card"
+                @click="showmovie"
+            >
                 <img
                     :src="`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`"
                 />
@@ -24,6 +43,7 @@ defineProps(["movies", "title"]);
             </div>
         </div>
     </div>
+    <MovieModal />
 </template>
 
 <style scoped>
@@ -102,5 +122,9 @@ defineProps(["movies", "title"]);
 
 a {
     text-decoration: none;
+    color: #fff;
+}
+h3 {
+    font-size: larger;
 }
 </style>

@@ -4,8 +4,11 @@ import {
     faMagnifyingGlass,
     faPlay,
     faThumbsUp,
+    faFire,
 } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faMagnifyingGlass, faThumbsUp, faPlay);
+import { faStar } from "@fortawesome/free-regular-svg-icons";
+
+library.add(faMagnifyingGlass, faThumbsUp, faPlay, faStar, faFire);
 
 export { FontAwesomeIcon };

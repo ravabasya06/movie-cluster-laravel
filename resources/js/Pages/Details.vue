@@ -1,52 +1,75 @@
-<script setup></script>
+<script setup>
+import Layout from "../Components/Layout.vue";
+import Cards from "../Components/Home/Cards.vue";
+defineProps(["movie", "release_date", "recommendation_movies", "casts"]);
+</script>
 <template>
-    <div class="container">
-        <div class="movie-page">
-            <div class="movie-details">
-                <div class="title">
-                    <h1>Woah Ini judul</h1>
-                    <h1 class="age-rate">16+</h1>
+    <Head title="Movie Details" />
+    <Layout>
+        <div class="container">
+            <!-- <div class="backdrop">
+            <img
+                :src="`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`"
+                alt="Movie Poster"
+            />
+        </div> -->
+            <div class="movie-page">
+                <div class="movie-details">
+                    <div class="title">
+                        <h1>{{ movie.title }}</h1>
+                        <h1 class="age-rate">16+</h1>
+                    </div>
+                    <div class="small-details">
+                        <p>Duration: 1h 23m</p>
+                        <p>
+                            Genre:
+                            <span v-for="genre in movie.genres">
+                                {{ genre.name }},
+                            </span>
+                        </p>
+                        <p>Release Date: {{ release_date }}</p>
+                        <p>{{ movie.overview }}</p>
+                        <p>
+                            Cast:
+                            <span v-for="cast in casts.cast">
+                                {{ cast.name }},
+                            </span>
+                        </p>
+                    </div>
                 </div>
-                <div class="small-details">
-                    <p>Duration: 1h 23m</p>
-                    <p>Genre: Action, Sci-Fi</p>
-                    <p>Release Date: December 19, 2006</p>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Animi accusamus facere natus corrupti sequi quidem
-                        perspiciatis tempora eum, reprehenderit incidunt,
-                        adipisci quisquam unde quaerat enim dolorem? Ducimus
-                        possimus aspernatur harum.
-                    </p>
-                    <p><strong>Cast:</strong> Actor, Actor lagi, Actor lain</p>
+                <div class="poster">
+                    <img
+                        :src="`https://image.tmdb.org/t/p/original/${movie.poster_path}`"
+                        alt="Movie Poster"
+                    />
                 </div>
-            </div>
-            <div class="poster">
-                <img
-                    src="/public/images/Persona.png"
-                    alt="Movie Poster Placeholder"
-                />
             </div>
         </div>
-    </div>
+        <Cards title="Recommendations" :movies="recommendation_movies" />
+    </Layout>
 </template>
 
 <style scoped>
-.container {
-    display: flex;
-    height: 100vh;
-}
 .movie-page {
     display: flex;
-    align-items: flex-start;
-    padding: 20px;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
+    padding: 50px;
+    gap: 20px;
+}
+
+.movie-details {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
 }
 
 .title {
     display: flex;
     gap: 10px;
     align-items: center;
+    justify-content: space-between;
 }
 
 .age-rate {
@@ -55,17 +78,9 @@
     display: inline-block;
 }
 
-.movie-details {
-    margin-right: 20px;
-}
-
-.small-details p {
-    margin-bottom: 10px;
-}
-
 .poster img {
-    max-width: 100%;
-    height: auto;
+    max-width: 50%;
+    height: 50%;
     border-radius: 8px;
 }
 </style>

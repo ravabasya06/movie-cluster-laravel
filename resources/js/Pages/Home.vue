@@ -10,7 +10,6 @@ defineProps(["popular_movies"]);
         <Cards title="Popular Movies" :movies="popular_movies" />
         <div class="genres">
             <h3>Jenis Genre</h3>
-            <Cards />
         </div>
     </Layout>
 </template>

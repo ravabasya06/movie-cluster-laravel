@@ -1,7 +1,8 @@
 <script setup>
 import MovieModal from "./MovieModal.vue";
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 let Movie;
+const selectedMovie = ref("");
 
 onMounted(() => {
     const MovieModalElement = document.getElementById("moviepopup");
@@ -10,7 +11,8 @@ onMounted(() => {
     }
 });
 
-const showmovie = () => {
+const showmovie = (themovie) => {
+    selectedMovie.value = themovie;
     Movie.show();
 };
 defineProps(["movies", "title"]);
@@ -24,26 +26,24 @@ defineProps(["movies", "title"]);
                 v-if="movies"
                 v-for="movie in movies.results"
                 class="card"
-                @click="showmovie"
+                @click="showmovie(movie)"
             >
                 <img
-                    :src="`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`"
+                    :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`"
                 />
                 <div class="rating">
-                    <p>Rating : {{ movie.vote_average }}</p>
+                    <font-awesome-icon icon="fa-regular fa-star" />
+                    <span>
+                        {{ movie.vote_average }}
+                    </span>
                 </div>
-                <div class="text">
-                    <Link :href="`/movie/${movie.id}`">
-                        <h3>{{ movie.title }}</h3>
-                    </Link>
-                </div>
-                <div class="details">
-                    <p>{{ movie.release_date }}</p>
+                <div class="text fw-bold">
+                    <span>{{ movie.title }}</span>
                 </div>
             </div>
         </div>
     </div>
-    <MovieModal />
+    <MovieModal :movie="selectedMovie" />
 </template>
 
 <style scoped>
@@ -53,7 +53,7 @@ defineProps(["movies", "title"]);
 
 .container-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: auto auto auto auto auto auto auto;
     gap: 15px;
 }
 
@@ -82,8 +82,10 @@ defineProps(["movies", "title"]);
     margin: 0;
 }
 .rating {
+    display: flex;
     position: absolute;
-    top: 0;
+    align-items: center;
+    gap: 5px;
     color: #fff;
     text-align: center;
     border: 1px solid black;
@@ -100,31 +102,16 @@ defineProps(["movies", "title"]);
     color: #fff;
     text-align: center;
     padding: 10px;
-    z-index: 1;
-}
-
-.details {
-    position: absolute;
-    bottom: -20px;
-    left: 0;
-    right: 0;
-    color: #fff;
-    text-align: center;
-    padding: 5px;
     opacity: 0;
     transition: opacity 0.3s;
-    z-index: 1;
 }
 
-.card:hover .details {
+.card:hover .text {
     opacity: 1;
 }
 
 a {
     text-decoration: none;
     color: #fff;
-}
-h3 {
-    font-size: larger;
 }
 </style>

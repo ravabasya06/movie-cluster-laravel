@@ -1,9 +1,8 @@
 <script setup>
-defineProps(["movies"]);
+defineProps(["movie"]);
 </script>
 
 <template>
-    <!-- Modal -->
     <div
         class="modal"
         id="moviepopup"
@@ -12,41 +11,39 @@ defineProps(["movies"]);
         aria-hidden="true"
     >
         <div class="modal-dialog modal-lg modal-dialog-zoom">
-            <!-- Added zoom class here -->
             <div class="modal-content">
                 <div class="img-container">
-                    <img src="/public/images/Persona5.jpg" alt="" />
-                    <button
-                        type="button"
-                        class="btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
-                    ></button>
-                    <!-- Play and Like buttons -->
+                    <img
+                        :src="`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`"
+                        alt="the image"
+                    />
                     <div class="action-buttons">
-                        <!-- INI PLAY NANTI TAMBAHIN LINK AJA JADI DIRECT LANGSUNG KE DETAIL.VUE -->
-                        <i class="fa fa-play-circle play-btn">
-                            <font-awesome-icon icon="fa-play"
-                        /></i>
-                        <i class="like-btn">
-                            <font-awesome-icon icon="fa-thumbs-up" />
-                        </i>
+                        <Link :href="`/movie/${movie.id}`" class="detail-button"
+                            >Details</Link
+                        >
                     </div>
                 </div>
                 <div class="modal-body">
-                    <h1 class="modal-title f-5" id="exampleModalLabel">
-                        judul film
-                    </h1>
-                    <div class="small-detail">
-                        <p>2023 1h 23m</p>
-                        <p class="age-rate">16+</p>
+                    <div class="title-container">
+                        <h1 class="modal-title f-5 fw-bold">
+                            {{ movie.title }}
+                        </h1>
+                        <p>
+                            <font-awesome-icon icon="fa-regular fa-star" />
+                            {{ movie.vote_average }}
+                        </p>
                     </div>
-                    <span class="fs-5 fw-bold"
-                        >Lorem ipsum dolor sit amet consectetur adipisicing
-                        elit. Ratione magni delectus possimus, eligendi hic quae
-                        ducimus ex consequatur fuga eveniet illo labore
-                        voluptatum nesciunt maiores tempore! Sequi quas nisi
-                        iste.
+                    <div class="small-detail">
+                        <p>
+                            {{ movie.release_date }}
+                        </p>
+                        <p>
+                            <font-awesome-icon icon="fire" />
+                            {{ movie.popularity }}
+                        </p>
+                    </div>
+                    <span>
+                        {{ movie.overview }}
                     </span>
                 </div>
             </div>
@@ -72,6 +69,17 @@ defineProps(["movies"]);
     display: block;
 }
 
+.title-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title-container p {
+    margin-top: 1rem;
+}
+
 .btn-close {
     color: white;
     position: absolute;
@@ -89,35 +97,31 @@ defineProps(["movies"]);
 
 .action-buttons {
     position: absolute;
-    bottom: 10px;
-    left: 10px;
+    bottom: 0;
     display: flex;
-    gap: 15px;
 }
 
-.action-buttons i {
-    font-size: 30px;
-    color: black;
+.detail-button {
+    color: white;
     cursor: pointer;
-    background-color: white;
-    padding: 8px;
-    border-radius: 25px;
+    text-decoration: none;
+    background-color: rgba(0, 0, 0, 0.95);
+    padding: 15px;
     align-items: center;
+    border-top-right-radius: 10px;
 }
+
+.detail-button:hover {
+    border-style: solid;
+    border-color: white;
+    border-bottom: 1px;
+    border-left: 1px;
+}
+
 .small-detail {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    gap: 10px;
-}
-.age-rate {
-    padding: 5px;
-    border: 1px solid white;
-    display: inline-block;
-}
-.play-btn:hover,
-.like-btn:hover {
-    color: blue;
+    justify-content: space-between;
 }
 
 .modal-content {

@@ -1,53 +1,14 @@
-<template>
-    <div class="recommendation-container">
-        <h1>{{ title }}</h1>
-        <div class="container-cards" ref="containerRef">
-            <div
-                v-if="movies"
-                v-for="movie in movies.results"
-                :key="movie.id"
-                class="card"
-                @click="showmovie(movie)"
-            >
-                <img
-                    :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`"
-                    alt="Movie Poster"
-                />
-                <div class="rating">
-                    <font-awesome-icon icon="fa-regular fa-star" />
-                    <span>{{ movie.vote_average }}</span>
-                </div>
-                <div class="text fw-bold">
-                    <span>{{ movie.title }}</span>
-                </div>
-            </div>
-        </div>
-
-        <font-awesome-icon
-            icon="caret-left"
-            class="switchLeft sliderbutton"
-            @click="scroll('left')"
-        />
-        <font-awesome-icon
-            icon="caret-right"
-            class="switchRight sliderbutton"
-            @click="scroll('right')"
-        />
-    </div>
-    <MovieModal :movie="selectedMovie" />
-</template>
-
 <script setup>
 import MovieModal from "./MovieModal.vue";
-import { onMounted, ref, defineProps } from "vue";
+import { onMounted, ref } from "vue";
 
 const props = defineProps(["movies", "title"]);
 
 let Movie;
 const selectedMovie = ref("");
 const containerRef = ref(null);
-const visibleCards = 1; // Number of visible cards
-const currentIndex = ref(0); // Current index for scrolling
+const visibleCards = 1;
+const currentIndex = ref(0);
 
 onMounted(() => {
     const MovieModalElement = document.getElementById("moviepopup");
@@ -76,6 +37,45 @@ const scroll = (direction) => {
     container.scrollTo({ left: newScrollLeft, behavior: "smooth" });
 };
 </script>
+<template>
+    <div class="recommendation-container">
+        <h1>{{ title }}</h1>
+        <div class="movie-caret-container">
+            <font-awesome-icon
+                icon="caret-left"
+                class="caret-button"
+                @click="scroll('left')"
+            />
+            <div class="container-cards" ref="containerRef">
+                <div
+                    v-if="movies"
+                    v-for="movie in movies.results"
+                    :key="movie.id"
+                    class="card"
+                    @click="showmovie(movie)"
+                >
+                    <img
+                        :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`"
+                        alt="Movie Poster"
+                    />
+                    <div class="rating">
+                        <font-awesome-icon icon="fa-regular fa-star" />
+                        <span>{{ movie.vote_average }}</span>
+                    </div>
+                    <div class="text fw-bold">
+                        <span>{{ movie.title }}</span>
+                    </div>
+                </div>
+            </div>
+            <font-awesome-icon
+                icon="caret-right"
+                class="caret-button"
+                @click="scroll('right')"
+            />
+        </div>
+    </div>
+    <MovieModal :movie="selectedMovie" />
+</template>
 
 <style scoped>
 .recommendation-container {
@@ -87,6 +87,7 @@ const scroll = (direction) => {
     display: flex;
     overflow: hidden;
     gap: 15px;
+    padding: 10px;
 }
 
 .card {
@@ -153,11 +154,18 @@ const scroll = (direction) => {
     z-index: 5;
 }
 
-.switchLeft {
-    left: 10px;
+.movie-caret-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
 }
 
-.switchRight {
-    right: 10px;
+.caret-button {
+    height: 50px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    padding: 15px;
 }
 </style>

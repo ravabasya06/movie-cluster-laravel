@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from "vue";
+import { useForm, router } from "@inertiajs/vue3";
 
 const isInputVisible = ref(false);
-const searchQuery = ref("");
 
 const toggleSearch = () => {
     isInputVisible.value = !isInputVisible.value;
@@ -10,6 +10,20 @@ const toggleSearch = () => {
 
 const hideInput = () => {
     isInputVisible.value = false;
+};
+
+const query = ref("");
+
+const search = () => {
+    const form = useForm({
+        search_query: query.value,
+    });
+
+    if (query.value) {
+        form.get(route("search"));
+    } else {
+        router.visit("/");
+    }
 };
 </script>
 
@@ -21,14 +35,17 @@ const hideInput = () => {
             @click="toggleSearch"
         />
         <transition name="fade">
-            <input
-                v-if="isInputVisible"
-                type="text"
-                v-model="searchQuery"
-                placeholder="Search..."
-                class="search-input"
-                @blur="hideInput"
-            />
+            <form class="search-form" @submit.prevent="search">
+                <input
+                    v-if="isInputVisible"
+                    type="text"
+                    v-model="query"
+                    name="search_query"
+                    placeholder="Search..."
+                    class="search-input"
+                    @blur="hideInput"
+                />
+            </form>
         </transition>
     </div>
 </template>
@@ -57,12 +74,16 @@ const hideInput = () => {
     border: 1px solid #ccc;
     border-radius: 4px;
     margin-left: 10px;
-    transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    transition:
+        width 0.3s ease-in-out,
+        opacity 0.3s ease-in-out;
 }
 
 .fade-enter-active,
 .fade-leave-active {
-    transition: opacity 0.3s ease-in-out, width 0.3s ease-in-out;
+    transition:
+        opacity 0.3s ease-in-out,
+        width 0.3s ease-in-out;
 }
 
 .fade-enter,

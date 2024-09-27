@@ -9,3 +9,4 @@ use App\Http\Controllers\MovieController;
 Route::get('/example', [ExampleController::class, 'index']);
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/movie/{id}', [MovieController::class, 'index'])->name('movie');
+Route::get('/search', [MovieController::class, 'search'])->name('search');

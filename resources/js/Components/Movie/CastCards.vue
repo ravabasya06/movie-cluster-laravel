@@ -50,7 +50,7 @@ const scroll = (direction) => {
                 >
                     <img
                         :src="`https://image.tmdb.org/t/p/w500/${cast.profile_path}`"
-                        alt="Movie Poster"
+                        alt="Cast Poster"
                     />
                     <div class="text">
                         <span class="fw-bold">{{ cast.name }}</span>
@@ -106,17 +106,6 @@ const scroll = (direction) => {
     height: 100%;
     object-fit: cover;
     display: block;
-}
-
-.rating {
-    display: flex;
-    position: absolute;
-    align-items: center;
-    gap: 5px;
-    color: #fff;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 5px;
-    z-index: 1;
 }
 
 .text {

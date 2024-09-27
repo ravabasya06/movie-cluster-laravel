@@ -4,82 +4,103 @@ import Cards from "../Components/Home/Cards.vue";
 import CastCards from "../Components/Movie/CastCards.vue";
 defineProps(["movie", "release_date", "recommendation_movies", "casts"]);
 </script>
+
 <template>
     <Head title="Movie Details" />
     <Layout>
-        <!-- <div class="backdrop">
-            <img
-                :src="`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`"
-                alt="Movie Poster"
-            />
-        </div> -->
-        <div class="movie-page">
-            <div class="movie-details">
-                <div class="title">
-                    <h1>{{ movie.title }}</h1>
-                    <h2
-                        v-if="
-                            movie.release_dates.results.find(
-                                (result) => result.iso_3166_1 === 'US',
-                            ).release_dates[0].certification
-                        "
-                        class="age-rate"
-                    >
-                        {{
-                            movie.release_dates.results.find(
-                                (result) => result.iso_3166_1 === "US",
-                            ).release_dates[0].certification
-                        }}
-                    </h2>
+        <div class="detail-page">
+            <div class="movie-page">
+                <div class="movie-details">
+                    <div class="title">
+                        <h1>{{ movie.title }}</h1>
+                        <h2
+                            v-if="
+                                movie.release_dates.results.find(
+                                    (result) => result.iso_3166_1 === 'US'
+                                )?.release_dates[0]?.certification
+                            "
+                            class="age-rate"
+                        >
+                            {{
+                                movie.release_dates.results.find(
+                                    (result) => result.iso_3166_1 === "US"
+                                ).release_dates[0].certification
+                            }}
+                        </h2>
+                    </div>
+                    <div class="small-details">
+                        <p v-if="movie.tagline">{{ movie.tagline }}</p>
+                        <div class="genre-title-container">
+                            <span
+                                v-for="genre in movie.genres"
+                                class="genre-title"
+                            >
+                                {{ genre.name }}
+                            </span>
+                        </div>
+                        <div class="rating">
+                            <p>
+                                <font-awesome-icon icon="fa-regular fa-star" />
+                                {{ movie.vote_average }}
+                            </p>
+                            <p>
+                                <font-awesome-icon icon="fire" />
+                                {{ movie.popularity }}
+                            </p>
+                        </div>
+                        <div class="date">
+                            <p class="relase_date">{{ release_date }}</p>
+                            <p class="status">{{ movie.status }}</p>
+                        </div>
+                        <p>{{ movie.overview }}</p>
+                        <a
+                            :href="movie.homepage"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            {{ movie.homepage }}
+                        </a>
+                    </div>
                 </div>
-                <div class="small-details">
-                    <div class="genre-title-container">
-                        <span v-for="genre in movie.genres" class="genre-title">
-                            {{ genre.name }}
-                        </span>
-                    </div>
-                    <p>Release Date: {{ release_date }}</p>
-                    <p>{{ movie.tagline }}</p>
-                    <p>{{ movie.overview }}</p>
-                    <p>{{ movie.homepage }}</p>
-                    <p>{{ movie.popularity }}</p>
-                    <p>{{ movie.vote_average }}</p>
-                    <p>{{ movie.status }}</p>
-                    <div v-for="company in movie.production_companies">
-                        <img
-                            :src="`https://image.tmdb.org/t/p/w500/${company.logo_path}`"
-                            alt=""
-                        />
-                        <span>{{ company.name }}</span>
-                    </div>
-                    <!-- <p>
-                        Cast:
-                        <span v-for="cast in casts.cast">
-                            {{ cast.name }},
-                        </span>
-                    </p> -->
+                <div class="poster">
+                    <img
+                        :src="`https://image.tmdb.org/t/p/original/${movie.poster_path}`"
+                        alt="Movie Poster"
+                    />
                 </div>
             </div>
-            <div class="poster">
-                <img
-                    :src="`https://image.tmdb.org/t/p/original/${movie.poster_path}`"
-                    alt="Movie Poster"
-                />
+            <div class="company-container">
+                <div
+                    v-for="company in movie.production_companies"
+                    class="company"
+                >
+                    <img
+                        :src="`https://image.tmdb.org/t/p/w500/${company.logo_path}`"
+                        alt=""
+                    />
+                    <span>{{ company.name }}</span>
+                </div>
             </div>
+            <CastCards :casts="casts" />
+            <Cards title="Recommendations" :movies="recommendation_movies" />
         </div>
-        <CastCards :casts="casts" />
-        <Cards title="Recommendations" :movies="recommendation_movies" />
     </Layout>
 </template>
 
 <style scoped>
+.detail-page {
+    margin: 0;
+    box-sizing: border-box;
+    max-width: 100%;
+}
+
 .movie-page {
     max-width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    /* align-items: center; */
     gap: 10px;
+    overflow: hidden;
 }
 
 .movie-details {
@@ -98,25 +119,88 @@ defineProps(["movie", "release_date", "recommendation_movies", "casts"]);
 
 .genre-title-container {
     display: flex;
-    flex: row;
+    flex-direction: row;
     gap: 15px;
     margin-bottom: 1rem;
 }
 
 .genre-title {
-    background-color: rgb(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.3);
     padding: 10px;
     border-radius: 10px;
+}
+
+.status {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.rating {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.date {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
 }
 
 .age-rate {
     margin: 0;
     padding: 5px;
     border: 1px solid white;
-    display: inline-block;
+}
+
+.poster {
+    max-width: 40%;
 }
 
 .poster img {
-    max-width: 100%;
+    max-width: 80vh;
+    max-height: 80vh;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+}
+
+.company-container {
+    padding: 100px;
+    background-color: aliceblue;
+    color: #000;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    justify-content: center;
+}
+
+.company {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    border: 1px solid #c0bfbf74;
+    border-radius: 5px;
+}
+
+.company img {
+    max-width: 100px;
+    height: auto;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: blue;
 }
 </style>

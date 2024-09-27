@@ -43,23 +43,23 @@ defineProps(["movie"]);
                     </div>
                 </div>
                 <div class="modal-body">
-                    <div class="title-container">
-                        <h1 class="modal-title f-5 fw-bold">
-                            {{ movie.title }}
-                        </h1>
-                        <p>
-                            <font-awesome-icon icon="fa-regular fa-star" />
-                            {{ movie.vote_average }}
-                        </p>
-                    </div>
+                    <h1 class="modal-title f-5 fw-bold">
+                        {{ movie.title }}
+                    </h1>
                     <div class="small-detail">
                         <p>
                             {{ movie.release_date }}
                         </p>
-                        <p>
-                            <font-awesome-icon icon="fire" />
-                            {{ movie.popularity }}
-                        </p>
+                        <div class="rating-container">
+                            <p>
+                                <font-awesome-icon icon="fa-regular fa-star" />
+                                {{ movie.vote_average }}
+                            </p>
+                            <p>
+                                <font-awesome-icon icon="fire" />
+                                {{ movie.popularity }}
+                            </p>
+                        </div>
                     </div>
                     <span>
                         {{ movie.overview }}
@@ -88,15 +88,10 @@ defineProps(["movie"]);
     display: block;
 }
 
-.title-container {
+.rating-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.title-container p {
-    margin-top: 1rem;
+    gap: 10px;
 }
 
 .btn-close {

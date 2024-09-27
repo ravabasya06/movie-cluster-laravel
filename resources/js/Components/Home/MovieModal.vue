@@ -1,4 +1,19 @@
 <script setup>
+import { onMounted, ref } from "vue";
+const selectedMovie = ref("");
+let Movie;
+
+onMounted(() => {
+    const MovieModalElement = document.getElementById("moviepopup");
+    if (MovieModalElement) {
+        Movie = new bootstrap.Modal(MovieModalElement);
+    }
+});
+
+const hidemovie = (themovie) => {
+    selectedMovie.value = themovie;
+    Movie.hide();
+};
 defineProps(["movie"]);
 </script>
 
@@ -18,7 +33,11 @@ defineProps(["movie"]);
                         alt="the image"
                     />
                     <div class="action-buttons">
-                        <Link :href="`/movie/${movie.id}`" class="detail-button"
+                        <Link
+                            data-dismiss="modal"
+                            aria-label="Close"
+                            :href="`/movie/${movie.id}`"
+                            class="close detail-button"
                             >Details</Link
                         >
                     </div>

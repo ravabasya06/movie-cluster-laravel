@@ -1,7 +1,7 @@
 <script setup>
 import Layout from "../Components/Layout.vue";
-import Cards from "../Components/Home/Cards.vue";
-import CastCards from "../Components/Movie/CastCards.vue";
+import MovieCarousel from "../Components/Home/MovieCarousel.vue";
+import CastCarousel from "../Components/Movie/CastCarousel.vue";
 defineProps(["movie", "release_date", "recommendation_movies", "casts"]);
 </script>
 
@@ -16,14 +16,14 @@ defineProps(["movie", "release_date", "recommendation_movies", "casts"]);
                         <h2
                             v-if="
                                 movie.release_dates.results.find(
-                                    (result) => result.iso_3166_1 === 'US'
+                                    (result) => result.iso_3166_1 === 'US',
                                 )?.release_dates[0]?.certification
                             "
                             class="age-rate"
                         >
                             {{
                                 movie.release_dates.results.find(
-                                    (result) => result.iso_3166_1 === "US"
+                                    (result) => result.iso_3166_1 === "US",
                                 ).release_dates[0].certification
                             }}
                         </h2>
@@ -81,8 +81,11 @@ defineProps(["movie", "release_date", "recommendation_movies", "casts"]);
                     <span>{{ company.name }}</span>
                 </div>
             </div>
-            <CastCards :casts="casts" />
-            <Cards title="Recommendations" :movies="recommendation_movies" />
+            <CastCarousel :casts="casts" />
+            <MovieCarousel
+                title1="Recommendations"
+                :movies1="recommendation_movies"
+            />
         </div>
     </Layout>
 </template>

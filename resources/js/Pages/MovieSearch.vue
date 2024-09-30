@@ -64,10 +64,13 @@ const showmovie = (themovie) => {
     grid-template-columns: auto auto auto auto auto auto;
     overflow: hidden;
     gap: 15px;
+    padding: 15px;
 }
 
 .card {
     min-width: calc(100% / 5 - 60px);
+    max-width: calc(500px / 2);
+    max-height: calc(750px / 2);
     position: relative;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 10px;

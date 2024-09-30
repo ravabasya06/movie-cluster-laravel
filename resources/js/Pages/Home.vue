@@ -1,14 +1,19 @@
 <script setup>
 import Layout from "../Components/Layout.vue";
-import Cards from "../Components/Home/Cards.vue";
+import MovieCarousel from "../Components/Home/MovieCarousel.vue";
 
 defineProps(["popular_movies", "top_movies", "trending_movies"]);
 </script>
 <template>
     <Head title="Home" />
     <Layout>
-        <Cards title="Popular Today" :movies="popular_movies" />
-        <Cards title=" Top Rated of All Time" :movies="top_movies" />
-        <Cards title="Trending Today" :movies="trending_movies" />
+        <MovieCarousel
+            title1="Popular Today"
+            title2="Top Movies"
+            title3="Trending Today"
+            :movies1="popular_movies"
+            :movies2="top_movies"
+            :movies3="trending_movies"
+        />
     </Layout>
 </template>

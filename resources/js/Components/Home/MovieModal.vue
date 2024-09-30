@@ -29,6 +29,7 @@ defineProps(["movie"]);
             <div class="modal-content">
                 <div class="img-container">
                     <img
+                        v-if="movie.backdrop_path"
                         :src="`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`"
                         alt="the image"
                     />
@@ -86,6 +87,8 @@ defineProps(["movie"]);
     height: 100%;
     object-fit: cover;
     display: block;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
 }
 
 .rating-container {
@@ -122,14 +125,12 @@ defineProps(["movie"]);
     background-color: rgba(0, 0, 0, 0.95);
     padding: 15px;
     align-items: center;
-    border-top-right-radius: 10px;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
 }
 
 .detail-button:hover {
-    border-style: solid;
-    border-color: white;
-    border-bottom: 1px;
-    border-left: 1px;
+    color: gray;
 }
 
 .small-detail {
@@ -141,6 +142,10 @@ defineProps(["movie"]);
 .modal-content {
     background-color: rgba(0, 0, 0, 0.95);
     color: rgb(255, 255, 255);
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-top-left-radius: 0;
 }
 
 .modal-dialog-zoom {

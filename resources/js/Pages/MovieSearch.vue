@@ -36,7 +36,7 @@ const showmovie = (themovie) => {
                 >
                     <img
                         :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`"
-                        alt="Movie Poster"
+                        :alt="movie.title"
                     />
                     <div class="rating">
                         <font-awesome-icon icon="fa-regular fa-star" />

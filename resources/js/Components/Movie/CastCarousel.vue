@@ -9,7 +9,7 @@ defineProps(["casts"]);
         <Splide
             :options="{
                 rewind: true,
-                perPage: 10,
+                perPage: 5,
                 gap: 10,
                 padding: 75,
             }"

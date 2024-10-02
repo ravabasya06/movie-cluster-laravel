@@ -23,23 +23,14 @@ import Search from "./Search.vue";
 .navbar {
     display: flex;
     justify-content: space-between;
-    align-items: center; /* Align items vertically in the center */
+    align-items: center;
     position: sticky;
     background-color: black;
-    padding: 10px;
     z-index: 1;
     padding: 0;
 }
 .logo {
     padding: 15px;
-    width: 125px;
-}
-
-.left-group {
-    display: flex;
-}
-
-.right-group {
-    display: flex;
+    width: 180px;
 }
 </style>

@@ -55,6 +55,7 @@ const search = () => {
     position: relative;
     display: flex;
     align-items: center;
+    margin: 15px;
 }
 
 .search-icon {
@@ -68,7 +69,7 @@ const search = () => {
 }
 
 .search-input {
-    width: 200px;
+    width: 350px;
     opacity: 1;
     padding: 8px;
     border: 1px solid #ccc;

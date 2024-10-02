@@ -1,5 +1,4 @@
 <script setup>
-import { onMounted, ref } from "vue";
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/vue-splide";
 import "@splidejs/vue-splide/css";
 defineProps(["casts"]);
@@ -10,8 +9,8 @@ defineProps(["casts"]);
         <Splide
             :options="{
                 rewind: true,
-                perPage: 5,
-                gap: 15,
+                perPage: 10,
+                gap: 10,
                 padding: 75,
             }"
             aria-label="Casts"
@@ -20,7 +19,7 @@ defineProps(["casts"]);
             <SplideTrack class="container-cards">
                 <SplideSlide
                     v-if="casts"
-                    v-for="cast in casts.cast"
+                    v-for="cast in casts.cast.slice(0, 50)"
                     :key="cast.id"
                     class="card"
                 >
@@ -108,5 +107,9 @@ defineProps(["casts"]);
 
 .card:hover .text {
     opacity: 1;
+}
+img {
+    text-align: center;
+    align-content: center;
 }
 </style>

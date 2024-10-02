@@ -19,7 +19,7 @@ defineProps(["casts"]);
             <SplideTrack class="container-cards">
                 <SplideSlide
                     v-if="casts"
-                    v-for="cast in casts.cast"
+                    v-for="cast in casts"
                     :key="cast.id"
                     class="card"
                 >

@@ -38,7 +38,7 @@ const showmovie = (themovie) => {
             :options="{
                 rewind: true,
                 perPage: 5,
-                gap: 15,
+                gap: 10,
                 padding: 75,
             }"
             :aria-label="title1"
@@ -77,7 +77,7 @@ const showmovie = (themovie) => {
             :options="{
                 rewind: true,
                 perPage: 5,
-                gap: 15,
+                gap: 10,
                 padding: 75,
             }"
             :aria-label="title2"
@@ -116,7 +116,7 @@ const showmovie = (themovie) => {
             :options="{
                 rewind: true,
                 perPage: 5,
-                gap: 15,
+                gap: 10,
                 padding: 75,
             }"
             :aria-label="title3"
@@ -155,7 +155,7 @@ const showmovie = (themovie) => {
             :options="{
                 rewind: true,
                 perPage: 5,
-                gap: 15,
+                gap: 10,
                 padding: 75,
             }"
             :aria-label="title4"
@@ -194,7 +194,7 @@ const showmovie = (themovie) => {
             :options="{
                 rewind: true,
                 perPage: 5,
-                gap: 15,
+                gap: 10,
                 padding: 75,
             }"
             :aria-label="title5"
@@ -247,7 +247,7 @@ const showmovie = (themovie) => {
 }
 
 .card {
-    min-width: calc(100% / 5 - 60px);
+    /* min-width: calc(100% / 5 - 60px); */
     max-width: calc(500px / 2);
     max-height: calc(750px / 2);
     position: relative;

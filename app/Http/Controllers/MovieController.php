@@ -13,7 +13,7 @@ class MovieController extends Controller
         $key = config('services.tmdb.key');
         $movie = Http::get('https://api.themoviedb.org/3/movie/'.$movie_id.'?append_to_response=release_dates&api_key='.$key)->json();
         $recommendation_movies = Http::get('https://api.themoviedb.org/3/movie/'.$movie_id.'/recommendations?language=en-US&page=1&api_key='.$key)->json();
-        $casts = Http::get('https://api.themoviedb.org/3/movie/'.$movie_id.'/credits?language=en-US&api_key='.$key)->json();
+        $casts = collect(Http::get('https://api.themoviedb.org/3/movie/'.$movie_id.'/credits?language=en-US&api_key='.$key)->json()['cast'])->slice(0, 50);
         $release_date = Carbon::parse($movie['release_date'])->format('d F Y');
             return Inertia::render('Details', [
             'movie' => $movie,

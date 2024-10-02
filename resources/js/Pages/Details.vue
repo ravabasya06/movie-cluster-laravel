@@ -16,14 +16,14 @@ defineProps(["movie", "release_date", "recommendation_movies", "casts"]);
                         <h2
                             v-if="
                                 movie.release_dates.results.find(
-                                    (result) => result.iso_3166_1 === 'US',
+                                    (result) => result.iso_3166_1 === 'US'
                                 )?.release_dates[0]?.certification
                             "
                             class="age-rate"
                         >
                             {{
                                 movie.release_dates.results.find(
-                                    (result) => result.iso_3166_1 === "US",
+                                    (result) => result.iso_3166_1 === "US"
                                 ).release_dates[0].certification
                             }}
                         </h2>
@@ -65,7 +65,7 @@ defineProps(["movie", "release_date", "recommendation_movies", "casts"]);
                 <div class="poster">
                     <img
                         :src="`https://image.tmdb.org/t/p/original/${movie.poster_path}`"
-                        alt="Movie Poster"
+                        alt="movie poster"
                     />
                 </div>
             </div>
@@ -76,7 +76,7 @@ defineProps(["movie", "release_date", "recommendation_movies", "casts"]);
                 >
                     <img
                         :src="`https://image.tmdb.org/t/p/w500/${company.logo_path}`"
-                        alt=""
+                        alt="company img"
                     />
                     <span>{{ company.name }}</span>
                 </div>
@@ -94,7 +94,6 @@ defineProps(["movie", "release_date", "recommendation_movies", "casts"]);
 .detail-page {
     margin: 0;
     box-sizing: border-box;
-    max-width: 100%;
 }
 
 .movie-page {
@@ -102,7 +101,7 @@ defineProps(["movie", "release_date", "recommendation_movies", "casts"]);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    gap: 10px;
+    gap: 5px;
     overflow: hidden;
 }
 
@@ -158,15 +157,11 @@ defineProps(["movie", "release_date", "recommendation_movies", "casts"]);
     border: 1px solid white;
 }
 
-.poster {
-    max-width: 40%;
-}
-
 .poster img {
     max-width: 80vh;
-    max-height: 80vh;
-    width: auto;
-    height: auto;
+    /* max-height: 80vh; */
+    /* width: auto; */
+    /* height: auto; */
     object-fit: cover;
 }
 

@@ -26,17 +26,8 @@ class MovieController extends Controller
     public function search(Request $request){
         $key = config('services.tmdb.key');
         $query = $request->input('search_query');
-        $results = Http::get('https://api.themoviedb.org/3/search/movie?query='.$query.'&include_adult=false&language=en-US&page=1&api_key='.$key)->json();
-        
-        // $spbu
-        //     ->where('spbus.spbu_id', 'LIKE', "%{$query}%")
-        //     ->orWhere('spbus.name', 'LIKE', "%{$query}%")
-        //     ->orWhere('spbus.road', 'LIKE', "%{$query}%")
-        //     ->orWhere('spbus.city', 'LIKE', "%{$query}%")
-        //     ->orWhere('provinces.name', 'LIKE', "%{$query}%")
-        //     ->orWhere('islands.name', 'LIKE', "%{$query}%")
-        //     ->paginate(16)->withQueryString()->onEachSide(1);
-
+        $page = $request->input('page', 1);
+        $results = Http::get('https://api.themoviedb.org/3/search/movie?query='.$query.'&include_adult=false&language=en-US&page='.$page.'&api_key='.$key)->json();
         return Inertia::render('MovieSearch', [
             'movies' => $results,
             'query' => $query,

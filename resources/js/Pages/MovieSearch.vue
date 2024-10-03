@@ -1,6 +1,7 @@
 <script setup>
 import Layout from "../Components/Layout.vue";
 import MovieModal from "../Components/Home/MovieModal.vue";
+import Pagination from "../Components/Movie/Pagination.vue";
 import { onMounted, ref } from "vue";
 
 defineProps(["movies", "query"]);
@@ -47,6 +48,7 @@ const showmovie = (themovie) => {
                     </div>
                 </div>
             </div>
+            <Pagination :movies="movies" :query="query" />
         </div>
         <MovieModal :movie="selectedMovie" />
     </Layout>

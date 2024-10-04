@@ -16,14 +16,14 @@ defineProps(["movie", "release_date", "recommendation_movies", "casts"]);
                         <h2
                             v-if="
                                 movie.release_dates.results.find(
-                                    (result) => result.iso_3166_1 === 'US',
+                                    (result) => result.iso_3166_1 === 'US'
                                 )?.release_dates[0]?.certification
                             "
                             class="age-rate"
                         >
                             {{
                                 movie.release_dates.results.find(
-                                    (result) => result.iso_3166_1 === "US",
+                                    (result) => result.iso_3166_1 === "US"
                                 ).release_dates[0].certification
                             }}
                         </h2>

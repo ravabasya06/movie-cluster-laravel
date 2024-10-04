@@ -2,9 +2,10 @@
 import Layout from "../Components/Layout.vue";
 import MovieModal from "../Components/Home/MovieModal.vue";
 import Pagination from "../Components/Movie/Pagination.vue";
+import GenreList from "../Components/Movie/GenreList.vue";
 import { onMounted, ref } from "vue";
 
-defineProps(["movies", "query"]);
+defineProps(["movies", "query", "genres", "genrelist"]);
 
 let Movie;
 const selectedMovie = ref("");
@@ -23,10 +24,13 @@ const showmovie = (themovie) => {
 };
 </script>
 <template>
-    <Head :title="`Search ${query}`" />
+    <Head :title="query ? query : 'Search'" />
     <Layout>
         <div class="search-container">
-            <h2>Here are results for the keyword {{ query }} :</h2>
+            <h2>
+                {{ query ? `Here are results for the keyword : ${query}` : "" }}
+            </h2>
+            <GenreList v-if="genres" :genrelist="genrelist" />
             <div class="container-cards" ref="containerRef">
                 <div
                     v-if="movies && movies.results.length"
@@ -48,7 +52,7 @@ const showmovie = (themovie) => {
                     </div>
                 </div>
             </div>
-            <Pagination :movies="movies" :query="query" />
+            <Pagination :movies="movies" :query="query" :genres="genres" />
         </div>
         <MovieModal :movie="selectedMovie" />
     </Layout>

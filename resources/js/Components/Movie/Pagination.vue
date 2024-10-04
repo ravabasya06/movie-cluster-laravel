@@ -2,7 +2,7 @@
 import { computed } from "vue";
 
 // Props
-const props = defineProps(["movies", "query"]);
+const props = defineProps(["movies", "query", "genres"]);
 
 // Variables
 const currentPage = props.movies.page;
@@ -33,49 +33,56 @@ const shouldShowLast = computed(() => currentPage < totalPages - pageNeighbors);
 </script>
 <template>
     <div class="page">
-        <!-- Previous Page Link -->
         <Link
             v-if="currentPage > 1"
-            :href="`/search?page=${currentPage - 1}&search_query=${query}`"
+            :href="
+                query
+                    ? `/search?page=${currentPage - 1}&search_query=${query}`
+                    : `/search?page=${currentPage - 1}&genres=${genres}`
+            "
             >Previous</Link
         >
-
-        <!-- First Page -->
         <Link
             v-if="shouldShowFirst"
-            :href="`/search?page=1&search_query=${query}`"
+            :href="
+                query
+                    ? `/search?page=1&search_query=${query}`
+                    : `/search?page=1&genres=${genres}`
+            "
         >
             <span>1</span>
         </Link>
-
-        <!-- Ellipsis before the current range -->
         <span v-if="shouldShowLeftEllipsis">...</span>
-
-        <!-- Page Numbers -->
         <Link
             v-for="page in pageRange"
             :key="page"
-            :href="`/search?page=${page}&search_query=${query}`"
+            :href="
+                query
+                    ? `/search?page=${page}&search_query=${query}`
+                    : `/search?page=${page}&genres=${genres}`
+            "
             :class="{ active: page === currentPage }"
         >
             <span>{{ page }}</span>
         </Link>
-
-        <!-- Ellipsis after the current range -->
         <span v-if="shouldShowRightEllipsis">...</span>
-
-        <!-- Last Page -->
         <Link
             v-if="shouldShowLast"
-            :href="`/search?page=${totalPages}&search_query=${query}`"
+            :href="
+                query
+                    ? `/search?page=${totalPages}&search_query=${query}`
+                    : `/search?page=${totalPages}&genres=${genres}`
+            "
         >
             <span>{{ totalPages }}</span>
         </Link>
-
-        <!-- Next Page Link -->
         <Link
             v-if="currentPage < totalPages"
-            :href="`/search?page=${currentPage + 1}&search_query=${query}`"
+            :href="
+                query
+                    ? `/search?page=${currentPage + 1}&search_query=${query}`
+                    : `/search?page=${currentPage + 1}&genres=${genres}`
+            "
             >Next</Link
         >
     </div>

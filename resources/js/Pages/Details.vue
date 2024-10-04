@@ -16,14 +16,14 @@ defineProps(["movie", "release_date", "recommendation_movies", "casts"]);
                         <h2
                             v-if="
                                 movie.release_dates.results.find(
-                                    (result) => result.iso_3166_1 === 'US'
+                                    (result) => result.iso_3166_1 === 'US',
                                 )?.release_dates[0]?.certification
                             "
                             class="age-rate"
                         >
                             {{
                                 movie.release_dates.results.find(
-                                    (result) => result.iso_3166_1 === "US"
+                                    (result) => result.iso_3166_1 === "US",
                                 ).release_dates[0].certification
                             }}
                         </h2>
@@ -31,12 +31,14 @@ defineProps(["movie", "release_date", "recommendation_movies", "casts"]);
                     <div class="small-details">
                         <p v-if="movie.tagline">{{ movie.tagline }}</p>
                         <div class="genre-title-container">
-                            <span
+                            <Link
                                 v-for="genre in movie.genres"
-                                class="genre-title"
+                                :href="`/search?genres=${genre.id}`"
                             >
-                                {{ genre.name }}
-                            </span>
+                                <span class="genre-title">
+                                    {{ genre.name }}
+                                </span>
+                            </Link>
                         </div>
                         <div class="rating">
                             <p>

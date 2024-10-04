@@ -13,9 +13,7 @@ body {
     margin: 0;
     color: white;
     background-color: #151515;
-    display: grid;
     height: 100vh;
-    grid-template-rows: auto 1fr auto;
 }
 
 @media (prefers-color-scheme: light) {

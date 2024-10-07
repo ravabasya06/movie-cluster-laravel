@@ -58,7 +58,7 @@ const showmovie = (themovie) => {
                     />
                     <div class="rating">
                         <font-awesome-icon icon="fa-regular fa-star" />
-                        <span>{{ movie.vote_average }}</span>
+                        <span>{{ movie.vote_average.toFixed(1) }}</span>
                     </div>
                     <div class="text fw-bold">
                         <span>{{ movie.title }}</span>
@@ -97,7 +97,7 @@ const showmovie = (themovie) => {
                     />
                     <div class="rating">
                         <font-awesome-icon icon="fa-regular fa-star" />
-                        <span>{{ movie.vote_average }}</span>
+                        <span>{{ movie.vote_average.toFixed(1) }}</span>
                     </div>
                     <div class="text fw-bold">
                         <span>{{ movie.title }}</span>
@@ -136,7 +136,7 @@ const showmovie = (themovie) => {
                     />
                     <div class="rating">
                         <font-awesome-icon icon="fa-regular fa-star" />
-                        <span>{{ movie.vote_average }}</span>
+                        <span>{{ movie.vote_average.toFixed(1) }}</span>
                     </div>
                     <div class="text fw-bold">
                         <span>{{ movie.title }}</span>
@@ -175,7 +175,7 @@ const showmovie = (themovie) => {
                     />
                     <div class="rating">
                         <font-awesome-icon icon="fa-regular fa-star" />
-                        <span>{{ movie.vote_average }}</span>
+                        <span>{{ movie.vote_average.toFixed(1) }}</span>
                     </div>
                     <div class="text fw-bold">
                         <span>{{ movie.title }}</span>
@@ -214,7 +214,7 @@ const showmovie = (themovie) => {
                     />
                     <div class="rating">
                         <font-awesome-icon icon="fa-regular fa-star" />
-                        <span>{{ movie.vote_average }}</span>
+                        <span>{{ movie.vote_average.toFixed(1) }}</span>
                     </div>
                     <div class="text fw-bold">
                         <span>{{ movie.title }}</span>

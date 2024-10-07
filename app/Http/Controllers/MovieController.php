@@ -27,7 +27,7 @@ class MovieController extends Controller
         $key = config('services.tmdb.key');
         $query = $request->input('search_query');
         $page = $request->input('page', 1);
-        $genres = implode(',', $request->input('genres'));
+        $genres = implode(',', $request->input('genres') ?? []);
         // dd($genres);
         $genrelist = Http::get('https://api.themoviedb.org/3/genre/movie/list?language=en&api_key='.$key)->json();
         if(!$query){

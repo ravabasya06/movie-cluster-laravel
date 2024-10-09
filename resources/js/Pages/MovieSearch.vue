@@ -26,11 +26,11 @@ const showmovie = (themovie) => {
 <template>
     <Head :title="query ? query : 'Search'" />
     <Layout>
+        <GenreList v-if="!query" :genrelist="genrelist" />
         <div class="search-container">
             <h2>
                 {{ query ? `Here are results for the keyword : ${query}` : "" }}
             </h2>
-            <GenreList v-if="!query" :genrelist="genrelist" />
             <div class="container-cards" ref="containerRef">
                 <div
                     v-if="movies && movies.results.length"

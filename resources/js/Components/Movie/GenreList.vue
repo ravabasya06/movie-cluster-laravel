@@ -20,7 +20,7 @@ const search = () => {
     if (form.genres) {
         form.get(route("search"));
     } else {
-        router.visit("/");
+        router.visit("/search");
     }
 };
 
@@ -63,10 +63,10 @@ const filterGenres = (genre) => {
 .genre-list-container {
     display: flex;
     flex-direction: row;
-    gap: 10px;
     overflow-x: auto;
     max-width: 100%;
     gap: 15px;
+    padding: 10px;
     align-items: center;
 }
 .genre-list {

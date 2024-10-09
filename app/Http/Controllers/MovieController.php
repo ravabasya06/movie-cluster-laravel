@@ -27,8 +27,7 @@ class MovieController extends Controller
         $key = config('services.tmdb.key');
         $query = $request->input('search_query');
         $page = $request->input('page', 1);
-        $genres =$request->input('genres');
-        // dd($genres);
+        $genres = $request->input('genres');
         $genrelist = Http::get('https://api.themoviedb.org/3/genre/movie/list?language=en&api_key='.$key)->json();
         if(!$query){
             $search = Http::get('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page='.$page.'&sort_by=popularity.desc&with_genres='.$genres.'&api_key='.$key)->json();
@@ -36,6 +35,7 @@ class MovieController extends Controller
         else{
             $search = Http::get('https://api.themoviedb.org/3/search/movie?query='.$query.'&include_adult=false&language=en-US&page='.$page.'&api_key='.$key)->json();
         }
+        $genres = explode(',',  $genres);
         return Inertia::render('MovieSearch', [
             'movies' => $search,
             'query' => $query,

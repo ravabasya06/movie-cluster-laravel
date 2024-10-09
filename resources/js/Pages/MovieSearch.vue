@@ -26,7 +26,11 @@ const showmovie = (themovie) => {
 <template>
     <Head :title="query ? query : 'Search'" />
     <Layout>
-        <GenreList v-if="!query" :genrelist="genrelist" />
+        <GenreList
+            v-if="!query"
+            :genrelist="genrelist"
+            :selected_genre="genres"
+        />
         <div class="search-container">
             <h2>
                 {{ query ? `Here are results for the keyword : ${query}` : "" }}

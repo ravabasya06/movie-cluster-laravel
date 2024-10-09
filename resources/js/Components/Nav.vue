@@ -66,5 +66,6 @@ import Search from "./Search.vue";
 .genre-button:hover {
     background-color: white;
     color: black;
+    border-radius: 20px;
 }
 </style>

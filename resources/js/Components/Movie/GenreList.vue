@@ -77,7 +77,8 @@ const filterGenres = (genre) => {
     align-content: center;
     border-radius: 8px;
     border: 1px solid white;
-    padding: 5px;
+    padding: 15px;
+    gap: 5px;
 }
 
 .genre-list input:checked {
@@ -93,7 +94,7 @@ const filterGenres = (genre) => {
 .genre-list p {
     font-size: 15px;
     margin: 0;
-    padding: 10px;
+    white-space: nowrap;
 }
 .genre-list input {
     width: 20px;

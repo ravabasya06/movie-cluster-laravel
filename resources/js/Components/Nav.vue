@@ -12,6 +12,15 @@ import Search from "./Search.vue";
                     alt="logo"
                 />
             </Link>
+            <div class="genre">
+                <!-- Isi ini pls  -->
+                <Link href="/">
+                    <button class="genre-button">
+                        <font-awesome-icon icon="folder-open" />
+                        Genres
+                    </button>
+                </Link>
+            </div>
         </div>
         <div class="right-group">
             <Search />
@@ -29,8 +38,33 @@ import Search from "./Search.vue";
     z-index: 1;
     padding: 0;
 }
+
 .logo {
     padding: 15px;
     width: 180px;
+}
+
+.left-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.right-group {
+    display: flex;
+    align-items: center;
+}
+
+.genre-button {
+    background-color: rgb(0, 0, 0);
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+.genre-button:hover {
+    background-color: white;
+    color: black;
 }
 </style>

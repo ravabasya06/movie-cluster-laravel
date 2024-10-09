@@ -17,7 +17,8 @@ const form = useForm({
 });
 
 const search = () => {
-    if (form.genres) {
+    if (form.genres.length > 0) {
+        form.genres = form.genres.join();
         form.get(route("search"));
     } else {
         router.visit("/search");
@@ -25,8 +26,12 @@ const search = () => {
 };
 
 const filterGenres = (genre) => {
-    form.genres.push(genre);
-    console.log(genre);
+    const index = form.genres.indexOf(genre);
+    if (index === -1) {
+        form.genres.push(genre);
+    } else {
+        form.genres.splice(index, 1);
+    }
 };
 </script>
 

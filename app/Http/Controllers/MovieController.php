@@ -28,10 +28,6 @@ class MovieController extends Controller
         $query = $request->input('search_query');
         $page = $request->input('page', 1);
         $genres =$request->input('genres');
-        if (!is_array($genres)) {
-            $genres = [$genres];
-        }
-        $genres = implode(',',  $genres);
         // dd($genres);
         $genrelist = Http::get('https://api.themoviedb.org/3/genre/movie/list?language=en&api_key='.$key)->json();
         if(!$query){

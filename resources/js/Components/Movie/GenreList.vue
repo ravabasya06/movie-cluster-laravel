@@ -1,7 +1,6 @@
 <script setup>
-import { ref } from "vue";
 import { useForm, router } from "@inertiajs/vue3";
-defineProps(["genrelist"]);
+const props = defineProps(["genrelist", "selected_genre"]);
 function myFunction() {
     const isChecked = document.getElementById("myCheck");
     const genre = document.getElementById("genre");
@@ -25,7 +24,11 @@ const search = () => {
     }
 };
 
-const filterGenres = (genre) => {
+const isSelected = (genre) => {
+    return form.genres.includes(genre);
+};
+
+const toggleGenre = (genre) => {
     const index = form.genres.indexOf(genre);
     if (index === -1) {
         form.genres.push(genre);
@@ -40,18 +43,16 @@ const filterGenres = (genre) => {
         <form class="genre-form" @submit.prevent="search">
             <div class="genre-list-container">
                 <div
-                    v-for="genre in genrelist.genres"
+                    v-for="genre in props.genrelist.genres"
                     :key="genre.id"
                     class="genre-list"
                     id="genre"
                 >
                     <p>{{ genre.name }}</p>
                     <input
-                        @click="filterGenres(genre.id)"
                         type="checkbox"
-                        :name="genre.name"
-                        :id="genre.id"
-                        :checked="genre.checked"
+                        :checked="isSelected(genre.id)"
+                        @change="toggleGenre(genre.id)"
                     />
                 </div>
             </div>

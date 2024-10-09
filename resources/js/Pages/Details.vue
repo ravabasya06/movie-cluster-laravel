@@ -60,7 +60,7 @@ defineProps(["movie", "release_date", "recommendation_movies", "casts"]);
                             target="_blank"
                             rel="noopener noreferrer"
                         >
-                            {{ movie.homepage }}
+                            <span class="movie-link">{{ movie.homepage }}</span>
                         </a>
                     </div>
                 </div>
@@ -129,15 +129,19 @@ defineProps(["movie", "release_date", "recommendation_movies", "casts"]);
 }
 
 .genre-title {
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgb(15, 15, 15);
     padding: 10px;
     border-radius: 10px;
 }
 
+.genre-title:hover {
+    background-color: white;
+}
+
 .status {
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgb(15, 15, 15);
     border-radius: 10px;
-    padding: 5px;
+    padding: 8px;
 }
 
 .rating {
@@ -200,7 +204,10 @@ a {
 }
 
 a:hover {
-    text-decoration: underline;
-    color: blue;
+    color: rgba(15, 15, 15);
+}
+
+.movie-link:hover {
+    color: black;
 }
 </style>

@@ -5,8 +5,7 @@ import {
     faPlay,
     faThumbsUp,
     faFire,
-    faCaretRight,
-    faCaretLeft,
+    faFolderOpen,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { faStar } from "@fortawesome/free-regular-svg-icons";
@@ -17,8 +16,7 @@ library.add(
     faPlay,
     faStar,
     faFire,
-    faCaretRight,
-    faCaretLeft
+    faFolderOpen
 );
 
 export { FontAwesomeIcon };

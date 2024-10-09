@@ -12,17 +12,12 @@ import Search from "./Search.vue";
                     alt="logo"
                 />
             </Link>
-            <div class="genre">
-                <!-- Isi ini pls  -->
-                <Link href="/">
-                    <button class="genre-button">
-                        <font-awesome-icon icon="folder-open" />
-                        Genres
-                    </button>
-                </Link>
-            </div>
         </div>
         <div class="right-group">
+            <Link href="/search" class="genre-button">
+                <font-awesome-icon icon="folder-open" />
+                Genres
+            </Link>
             <Search />
         </div>
     </nav>
@@ -58,14 +53,15 @@ import Search from "./Search.vue";
 .genre-button {
     background-color: rgb(0, 0, 0);
     color: white;
-    padding: 10px;
+    padding: 15px;
     font-size: 16px;
     border: none;
     cursor: pointer;
+    text-decoration: none;
+    border-radius: 8px;
 }
 .genre-button:hover {
     background-color: white;
     color: black;
-    border-radius: 20px;
 }
 </style>

@@ -30,7 +30,7 @@ const showmovie = (themovie) => {
             <h2>
                 {{ query ? `Here are results for the keyword : ${query}` : "" }}
             </h2>
-            <GenreList v-if="genres" :genrelist="genrelist" />
+            <GenreList v-if="!query" :genrelist="genrelist" />
             <div class="container-cards" ref="containerRef">
                 <div
                     v-if="movies && movies.results.length"
